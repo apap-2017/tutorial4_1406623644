@@ -1,0 +1,79 @@
+RINGKASAN
+Pada tutorial kali ini saya belajar untuk menggunakan Model dan Service pada Project Spring Boot
+
+PERTANYAAN
+
+Pertanyaan 1
+	Hasil: "Data berhasil ditambahkan"
+
+Pertanyaan 2
+	Hasil: "Whitelabel Error Page"
+	Karena: parameter gpa nya tidak ada dan tidak di handling untuk mengatasi, case tersebut
+
+Pertanyaan 3
+	Hasil: "NPM: 12345 
+		Nama: Chanek
+		GPA: 3.43"
+
+Pertanyaan 4
+	Hasil: "Whitelabel Error Page"
+	Karena: tidak muncul karena sebelumnya data yang sudah ada di ArrayList setelah
+		di relaunch akan menghilang, dan tidak tersimpan di memory yang ada di
+		session sebelumnya. Karenanya itu fungsi dari database
+
+LATIHAN
+
+PathVariable View Mahasiswa
+	1. Pada tutorial 2 sudah dijelaskan bagaimana menggunakan PathVariable, dengan itu
+	   saya mengimplementasi latihan ini dengan tutorial tersebut. Sebelumnya method RequestParam
+	   yang view mahasiswa harus dikomen terlebih dahulu karena akan terjadi ambigous ketika method 
+	   pathvariable nya akan diimplementasi
+
+	2. Kemudian menambahkan required = false apabila variable npm tidak diisi tetap bisa berjalan
+
+	3. Kemudian membuat dua buah kondisi, yaitu apabila variable npm ada maka variable npm akan
+	   diambil dan diinject pada studentService.selectStudent(), kondisi yang kedua adalah jika
+	   npm tidak ada, yaitu membuat 3 buah variable tambahan untuk npm, nama, dan gpa nya, setelah
+	   itu diinject di variable student untuk menambahkan data baru ke arraylist, yang kemudian 
+    	   student itu diinject kembali ke variable students yaitu studentService.selectStudent, dan 
+	   melemparkannya ke html
+
+	4. Selesai
+	5. Code:
+@RequestMapping("/student/viewall")
+	public String viewAll(Model model) {
+		List<StudentModel> students = studentService.selectAllStudents();
+		model.addAttribute("students", students);
+		return "viewall";
+	}
+	
+	@RequestMapping(value = {"student/view", "/student/view/{npm}"})
+	public String viewPath(@PathVariable(required = false) String npm, Model model) {
+		if(npm != null) {
+			String tnpm = "" + npm;
+			StudentModel student = studentService.selectStudent(tnpm);
+			model.addAttribute("student", student);
+		}
+		else {
+			String npm1 = "TIDAKDITEMUKAN";
+			String name = "TIDAKDITEMUKAN";
+			double gpa = 0.0;
+			StudentModel student = new StudentModel(npm1, name, gpa);
+			studentService.addStudent(student);
+			StudentModel students  = studentService.selectStudent(npm1);
+			model.addAttribute("student", students);
+		}
+		return "view";
+	}
+
+//Sebelumnya method view di komen dikarenakan akan bentrok apabila di implementasi
+
+Delete ArrayList
+	1. Menambahkan interface delete pada StudentService.java yaitu boolean delete(String npm)
+	2. Menambahkan method delete di InMemoryStudent.java dan membuat iterasinya apabila menerima
+	   npm
+	3. Membuat method PathVariable yang sebelumnya sudah dibuat RequestMapping nya, ketika npm diterima
+	   maka ada boolean yang menentukan apabila di delete atau tidak, yang akan dilempar ke html yang 
+	   dituju
+	4. Membuat file delete.html, dan membuat kondisi apabila npm ada pada arraylist, dan apabila npm tidak 
+	   ada pada arraylist
