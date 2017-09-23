@@ -21,6 +21,12 @@ Pertanyaan 4
 		di relaunch akan menghilang, dan tidak tersimpan di memory yang ada di
 		session sebelumnya. Karenanya itu fungsi dari database
 
+Pertanyaan 5
+	Hasil: data yang ada di arraylist dapat dikeluarkan
+
+Pertanyaan 6
+	Hasil: semua data yang ada di arraylist dapat dikeluarkan
+
 LATIHAN
 
 PathVariable View Mahasiswa
