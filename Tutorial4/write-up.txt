@@ -1,0 +1,4 @@
+Tidak bisa melanjutkan tutorial dikarenakan beberapa dependency tidak bisa diinstall melalui POM di eclipse
+
+[WARNING] The requested profile pom.xml could not be activated because it does not exist.
+[ERROR] Failed to execute goal on project Tutorial4 Could not resolve dependencies for project com.exampleTutorial4jar0.0.1-SNAPSHOT Failed to collect dependencies at org.mybatis.spring.bootmybatis-spring-boot-starterjar1.3.1 Failed to read artifact descriptor for org.mybatis.spring.bootmybatis-spring-boot-starterjar1.3.1 Could not transfer artifact org.mybatis.spring.bootmybatis-spring-boot-starterpom1.3.1 fromto com.springsource.repository.bundles.release (httprepository.springsource.commavenbundlesrelease) connect timed out - [Help 1]
